@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-  const miniestacion = sequelize.define('medidas', {
+  const miniestacion = sequelize.define('miniestacion', {
     id: {
       type: Sequelize.INTEGER,
       primaryKey: true,
@@ -29,6 +29,10 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.FLOAT,
       allowNull: true
     },
+    wifiRsii: {
+      type: Sequelize.FLOAT,
+      allowNull: true
+    }
   },
     {
       timestamps: true,

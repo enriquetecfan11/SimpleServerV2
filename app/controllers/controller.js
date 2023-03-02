@@ -200,6 +200,7 @@ const postMiniEstacion = (req, res) => {
   var altura = req.body.altura;
   var presion = req.body.presion;
   var luxes = req.body.luxes;
+  var wifiRssi = req.body.wifiRsii;
 
 
   // Pass req.body to JSON
@@ -219,6 +220,7 @@ const postMiniEstacion = (req, res) => {
     altura: altura,
     presion: presion,
     luxes: luxes,
+    wifiRsii: wifiRssi,
   }
 
   console.log(miniestaciondatos)
@@ -235,8 +237,8 @@ const postMiniEstacion = (req, res) => {
     });
 }
 
-const getEstacion = (req, res) => {
-  MiniEstacion.findAll().then(miniestacion => {
+const getMiniEstacion = (req, res) => {
+  miniestacion.findAll().then(miniestacion => {
     res.status(200).json(miniestacion);
   }).catch(err => {
     res.sendStatus(500);
@@ -254,5 +256,5 @@ module.exports = {
   getMedidas,
   getSensor,
   postMiniEstacion,
-  getEstacion
+  getMiniEstacion
 }

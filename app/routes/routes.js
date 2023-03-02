@@ -15,6 +15,6 @@ router.post('/medidas', ApiController.postMedidas);
 router.get('/medidas', ApiController.getMedidas);
 
 router.post('/miniestacion', ApiController.postMiniEstacion);
-// router.get('/miniestacion', ApiController.getMiniEstacion);
+router.get('/miniestacion', ApiController.getMiniEstacion);
 
 module.exports = router;
