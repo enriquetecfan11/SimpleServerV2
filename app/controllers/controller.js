@@ -1,4 +1,3 @@
-const { miniestacion } = require('../models');
 const db = require('../models')
 const Sensores = db.sensores;
 const Medidas = db.medidas;
