@@ -3,6 +3,7 @@ const db = require('../models')
 const Sensores = db.sensores;
 const Medidas = db.medidas;
 const Pruebas = db.pruebas;
+const miniestacion = db.miniestacion;
 
 
 const postSensores = (req, res) => {
@@ -225,7 +226,7 @@ const postMiniEstacion = (req, res) => {
   console.log(miniestaciondatos)
 
   // Save miniestacion in the database
-  MiniEstacion.create(miniestaciondatos)
+  miniestacion.create(miniestaciondatos)
     .then(data => {
       res.status(200).json(data);
     }).catch(err => {
