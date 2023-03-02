@@ -212,7 +212,6 @@ const postMiniEstacion = (req, res) => {
   console.log("-.-.-.-.-.-.-.-.-.-.-.-.-.-.--.-.-.-.-.-.-.-.-.-" + "\n");
 
   // Data to be saved in the database
-
   const miniestaciondatos = {
     dispositivo: device,
     hora: timestamp,
