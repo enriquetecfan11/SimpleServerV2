@@ -33,13 +33,11 @@ db.sequelize.sync()
     -*- Server Options -*-
 
     Develoment Evnironment
-
     Windows = $env:NODE_ENV = 'development'
     Linux && Mac = export NODE_ENV=development
     then run: npm start to use development environment
 
     Production Environment
-    
     Windows = $env:NODE_ENV = 'production'
     Linux && Mac = export NODE_ENV=production
     then run: npm start to use production environment
