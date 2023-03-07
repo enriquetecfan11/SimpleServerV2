@@ -22,67 +22,12 @@ app.use('/api', ApiRoutes);
 const db = require('./app/models');
 
 db.sequelize.sync()
-.then(() => {
+  .then(() => {
     console.log("✅ Successfully connected to the database");
-})
-.catch((err) => {
+  })
+  .catch((err) => {
     console.log("Failed to sync db: " + err.message);
-});
-
-// System Information Level
-const getIP = () => {
-  const networkInterfaces = os.networkInterfaces();
-  const addresses = [];
-  for (const k in networkInterfaces) {
-    for (const k2 in networkInterfaces[k]) {
-      const address = networkInterfaces[k][k2];
-      if (address.family === 'IPv4' && !address.internal) {
-        addresses.push(address.address);
-      }
-    }
-  }
-  return addresses;
-}
-
-
-const getCPU = () => {
-  return new Promise((resolve, reject) => {
-    si.cpu((data) => {
-      resolve(data);
-    })
-  })
-}
-
-const getDisk = () => {
-  return new Promise((resolve, reject) => {
-    si.fsSize((data) => {
-      resolve(data);
-    })
-  })
-}
-
-const getRAM = () => {
-  return new Promise((resolve, reject) => {
-    si.mem((data) => {
-      resolve(data);
-    })
-  })
-}
-
-const getServerStatus = async () => {
-  const cpu = await getCPU();
-  const disk = await getDisk();
-  const ram = await getRAM();
-  const ip = getIP();
-  const status = {
-    cpu,
-    disk,
-    ram,
-    ip
-  }
-  return status;
-}
-
+  });
 
 /*
     -*- Server Options -*-
@@ -105,13 +50,13 @@ const getServerStatus = async () => {
 var environment = process.env.NODE_ENV;
 
 if (environment === 'development') {
-    db.sequelize.sync({ force: true }).then(() => {
-        console.log('Drop and Resync with { force: true }');
-    })
+  db.sequelize.sync({ force: true }).then(() => {
+    console.log('Drop and Resync with { force: true }');
+  })
 }
 
-if(environment === 'production') {
-    db.sequelize.sync();
+if (environment === 'production') {
+  db.sequelize.sync();
 }
 
 
@@ -119,18 +64,33 @@ if(environment === 'production') {
 var port = process.env.PORT || 8000;
 
 app.listen(port, async () => {
-  const status = await getServerStatus();
   const date = new Date();
   const hour = new Intl.DateTimeFormat('es', { hour: 'numeric', hour12: false }).format(date);
   const minute = new Intl.DateTimeFormat('es', { minute: 'numeric' }).format(date);
   const second = new Intl.DateTimeFormat('es', { second: 'numeric' }).format(date);
 
-  console.log(`🚀 Server started on port ${port}`);
+  const cpu = await si.cpu();
+  const disk = await si.fsSize();
+  const ram = await si.mem();
+  const ip = Object.values(os.networkInterfaces())
+    .flatMap(iface => iface.filter(address => !address.internal && address.family === 'IPv4'))
+    .map(address => address.address);
+
+  const status = {
+    cpu,
+    disk,
+    ram,
+    ip
+  }
+
+
+  console.log(`🚀  Server started on port ${port}`);
+  console.log(`🕒  Time: ${hour}:${minute}:${second}`);
   console.log(`🖥️  CPU: Model -> ${status.cpu.manufacturer} ${status.cpu.brand} , Cores -> ${status.cpu.cores} , Speed -> ${status.cpu.speed} GHz`);
   console.log(`💻  RAM: ${status.ram.total} GB`);
   console.log(`📀  Disk: Total -> ${status.disk[0].size} GB , Used -> ${status.disk[0].used} GB`);
   console.log(`🌐  IP: ${status.ip}`);
-  console.log(`🕒  Time: ${hour}:${minute}:${second}`);
+
 
 
 }).on('error', err => {
