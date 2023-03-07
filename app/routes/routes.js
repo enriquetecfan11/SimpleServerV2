@@ -10,7 +10,6 @@ router.delete('/sensores/:id', ApiController.deleteSensorById);
 router.post('/sensor', ApiController.postSensor);
 router.get('/sensor', ApiController.getSensor);
 
-
 router.post('/medidas', ApiController.postMedidas);
 router.get('/medidas', ApiController.getMedidas);
 

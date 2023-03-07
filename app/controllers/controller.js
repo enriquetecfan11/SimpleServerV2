@@ -41,7 +41,7 @@ const postSensores = (req, res) => {
 }
 
 const postSensor = (req, res) => {
-  var dispositivo = req.body.dispositivo;
+  var dispositivo = req.query.dispositivo;
 
   // Validate request
   if (!dispositivo) {
@@ -51,22 +51,35 @@ const postSensor = (req, res) => {
     return;
   }
 
-  // // Create a Sensor object
+  // Create a Sensor object
   const sensor = {
     dispositivo: dispositivo,
   }
 
-  // Save Sensor in the database
-  Sensores.create(sensor)
-    .then(data => {
-      res.send(data);
+  // Save Sensor in the database but if it is already in the database do not save it.
+  Sensores.findOrCreate({
+    where: {
+      dispositivo: dispositivo
+    },
+    defaults: sensor
+  }).then(([sensor, created]) => {
+    if (created) {
+      res.status(201).json(
+        {
+          message: "Sensor created"
+        }
+      );
+    } else {
+      res.status(400).json(
+        {
+          message: "Sensor Already Created"
+        }
+      );
     }
-    ).catch(err => {
-      res.status(500).send({
-        message: err.message || "Some error occurred while creating the Sensor."
-      });
-    });
-
+  }).catch(err => {
+    res.sendStatus(500);
+    console.log(err);
+  });
 }
 
 const getSensor = (req, res) => {
