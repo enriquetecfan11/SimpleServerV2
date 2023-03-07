@@ -6,21 +6,22 @@ The difference between Simple Sever and this server have connection with Postgre
 <p>
 <br />
 
-## :rocket: Technologies ##
+## 🚀 Technologies
 
 Node, Express and PostgreSQL Database
 
-## :memo: Contributing ##
+## 📝 Contributing
 
-This is and open source project if you want to collaborate look at issues and choose you want to collaborate 
+This is and open source project if you want to collaborate look at issues and choose you want to collaborate
 
-###  Quick Start
+### Quick Start
 
 In order to start testing the server, you must follow these steps:
 
 ```console
 $ git clone https://github.com/enriquetecfan11/SimpleServer.git
 ```
+
 Install dependencies:
 
 ```console
@@ -34,9 +35,11 @@ $ npm start
 ```
 
 Start Server Developer Mode:
+
 ```console
 $ npm run dev
 ```
+
 ### 🐳 Quick Start Docker
 
 If you want use this with docker:
@@ -53,4 +56,12 @@ Second run image:
 $ docker run -dp 4000:4000 getting-started.
 ```
 
-Made with :heart: by <a href="https://github.com/enriquetecfan11" target="_blank">Enrique Rodriguez</a>
+If you want to create a docker image with PostgreSQL
+
+```console
+docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d postgres
+```
+
+
+
+Made with ❤️ by `<a href="https://github.com/enriquetecfan11" target="_blank">`Enrique Rodriguez `</a>`
