@@ -71,8 +71,8 @@ const createSensor = (req, res) => {
   }
 
   console.log(
-    `🟢  Sensor name: ${sensor.nombre} \n` +
-    `🟢  Sensor uuid: ${sensor.uuid} \n`
+    `[+] Sensor name: ${sensor.nombre} \n` +
+    `[-] Sensor uuid: ${sensor.uuid} \n`
   )
 
   // Add data to db
