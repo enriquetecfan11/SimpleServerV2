@@ -21,14 +21,6 @@ app.use('/api', ApiRoutes);
 // DB Options
 const db = require('./app/models');
 
-db.sequelize.sync()
-  .then(() => {
-    console.log("✅ Successfully connected to the database");
-  })
-  .catch((err) => {
-    console.log("Failed to sync db: " + err.message);
-  });
-
 /*
     -*- Server Options -*-
 
@@ -63,7 +55,7 @@ if (environment === 'production') {
 // Start server
 var port = process.env.PORT || 8000;
 
-app.listen(port, async () => {
+async function systemInformation() {
   const date = new Date();
   const hour = new Intl.DateTimeFormat('es', { hour: 'numeric', hour12: false }).format(date);
   const minute = new Intl.DateTimeFormat('es', { minute: 'numeric' }).format(date);
@@ -83,16 +75,39 @@ app.listen(port, async () => {
     ip
   }
 
+  console.log(`🟢  System Information: ${hour}:${minute}:${second}`);
+  console.log(
+    `🟢  IP status: ${status.ip} \n` +
+    `🟢  Server time: ${hour}:${minute}:${second} \n` +
+    `🟢  Server OS: ${os.platform()} \n` +
+    `🟢  Server total CPU: ${os.cpus()[0].model} \n` +
+    `🟢  Server total RAM: ${os.totalmem() / 1024 / 1024 / 1024} GB \n` +
+    `🟢  Server total disk: ${status.disk[0].size} GB \n` +
+    `🟢  Server RAM usage: ${status.ram.used / 1024 / 1024 / 1024} GB % \n` +
+    `🟢  Server disk usage: ${status.disk[0].used} GB \n`
+  );
+}
 
-  console.log(`🚀  Server started on port ${port}`);
-  console.log(`🕒  Time: ${hour}:${minute}:${second}`);
-  console.log(`🖥️  CPU: Model -> ${status.cpu.manufacturer} ${status.cpu.brand} , Cores -> ${status.cpu.cores} , Speed -> ${status.cpu.speed} GHz`);
-  console.log(`💻  RAM: ${status.ram.total} GB`);
-  console.log(`📀  Disk: Total -> ${status.disk[0].size} GB , Used -> ${status.disk[0].used} GB`);
-  console.log(`🌐  IP: ${status.ip}`);
+async function databaseConnection() {
+  db.sequelize.sync()
+    .then(() => {
+      console.log("🟢  Database connected");
+    })
+    .catch((err) => {
+      console.log("🔴  Database connection failed " + err.message);
+    });
+}
 
+async function startServer() {
+  app.listen(port, () => {
+    console.log(`🚀  Server started on port ${port}`);
+  });
+}
 
+async function main() {
+  await startServer();
+  await systemInformation();
+  await databaseConnection();
+}
 
-}).on('error', err => {
-  console.log(err);
-});
+main();
