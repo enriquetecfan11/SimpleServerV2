@@ -16,9 +16,6 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.sensores = require('../models/SensorModel')(sequelize, Sequelize);
-db.medidas = require('../models/MedidasModel')(sequelize, Sequelize);
-db.pruebas = require('../models/PruebasModel')(sequelize, Sequelize);
 db.miniestacion = require('../models/MiniEstacionModel')(sequelize, Sequelize);
 
 module.exports = db;
