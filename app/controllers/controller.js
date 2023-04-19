@@ -83,9 +83,15 @@ const createSensor = (req, res) => {
       message: err.message || "Some error occurred while creating the Medidas."
     });
   });
-
 }
 
+const getSensor = (req, res) => {
+  sensor.findAll().then(sensor => {
+    res.status(200).json(sensor);
+  }).catch(err => {
+    res.sendStatus(500);
+  });
+}
 
 const miniestacionID = (req, res) => {
   const datosEstacion = {
@@ -134,5 +140,7 @@ const miniestacionID = (req, res) => {
 module.exports = {
   postMiniEstacion,
   getMiniEstacion,
-  createSensor
+  createSensor,
+  getSensor,
+  miniestacionID
 }
