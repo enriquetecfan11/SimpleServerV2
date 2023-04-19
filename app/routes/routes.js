@@ -5,4 +5,6 @@ const router = express.Router();
 router.post('/miniestacion', ApiController.postMiniEstacion);
 router.get('/miniestacion', ApiController.getMiniEstacion);
 
+router.post('/createsensor', ApiController.createSensor);
+
 module.exports = router;

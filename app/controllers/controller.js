@@ -1,6 +1,10 @@
 const db = require('../models')
 const miniestacion = db.miniestacion;
 
+const { v4: uuidv4 } = require('uuid');
+const crypto = require('crypto')
+
+
 const postMiniEstacion = (req, res) => {
   var date = new Date();
   var timeString = date.toLocaleTimeString();
@@ -61,7 +65,24 @@ const getMiniEstacion = (req, res) => {
 }
 
 
+const createSensor = (req, res) => {
+  const sensor = {
+    nombre: req.body.nombre,
+    uuid: uuidv4(),
+  }
+
+  console.log(
+    `🟢  Sensor name: ${sensor.nombre} \n` +
+    `🟢  Sensor uuid: ${sensor.uuid} \n`
+  )
+
+  res.status(200).json(sensor)
+
+
+}
+
 module.exports = {
   postMiniEstacion,
-  getMiniEstacion
+  getMiniEstacion,
+  createSensor
 }
