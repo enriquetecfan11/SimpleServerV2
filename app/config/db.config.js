@@ -9,10 +9,11 @@
 // Servidor Local -> postgres://postgres:postgrespw@localhost:32768
 
 const user = 'postgres'
-const password = 'postgrespw'
+
 const host = 'host.docker.internal'
 const port = '32768'
 const database = 'postgres'
+const password = 'postgrespw'
 
 module.exports = {
     HOST: host,
