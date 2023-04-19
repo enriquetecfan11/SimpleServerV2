@@ -6,7 +6,7 @@ router.post('/miniestacion', ApiController.postMiniEstacion);
 router.get('/miniestacion', ApiController.getMiniEstacion);
 
 router.post('/createsensor', ApiController.createSensor);
-router.get('/getsensor', ApiController.getSensor);
+router.get('/sensor', ApiController.getSensor);
 
 router.post('/miniestacionid', ApiController.miniestacionID);
 
