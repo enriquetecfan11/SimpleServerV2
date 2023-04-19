@@ -21,8 +21,8 @@ const postMiniEstacion = (req, res) => {
 
 
   // Pass req.body to JSON
-  var data = JSON.stringify(req.body);
-  res.status(200).json(data)
+  // var data = JSON.stringify(req.body);
+  // res.status(200).json(data)
 
 
   console.log("-----------------------------------------------" + "\n");
@@ -46,15 +46,14 @@ const postMiniEstacion = (req, res) => {
     wifiRsii: wifiRssi,
   }
 
-  miniestacion.create(miniestaciondatos)
-    .then(data => {
-      res.status(200).json(data);
-    }).catch(err => {
-      // console.log(err);
-      res.status(500).send({
-        message: err.message || "Some error occurred while creating the Medidas."
-      });
+  // Add data to db
+  db.miniestacion.create(miniestaciondatos).then(miniestacion => {
+    res.status(200).json(miniestacion);
+  }).catch(err => {
+    res.status(500).send({
+      message: err.message || "Some error occurred while creating the Medidas."
     });
+  });
 }
 
 const getMiniEstacion = (req, res) => {
@@ -76,15 +75,14 @@ const createSensor = (req, res) => {
     `🟢  Sensor uuid: ${sensor.uuid} \n`
   )
 
-  sensor.create(sensor)
-    .then(data => {
-      res.status(200).json(data);
-    }).catch(err => {
-      // console.log(err);
-      res.status(500).send({
-        message: err.message || "Some error occurred while creating the Medidas."
-      });
+  // Add data to db
+  db.sensor.create(sensor).then(sensor => {
+    res.status(200).json(sensor);
+  }).catch(err => {
+    res.status(500).send({
+      message: err.message || "Some error occurred while creating the Medidas."
     });
+  });
 
 }
 
