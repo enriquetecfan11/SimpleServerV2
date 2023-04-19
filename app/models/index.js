@@ -17,5 +17,6 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.miniestacion = require('../models/MiniEstacionModel')(sequelize, Sequelize);
+db.sensor = require('../models/sensorModel')(sequelize, Sequelize);
 
 module.exports = db;

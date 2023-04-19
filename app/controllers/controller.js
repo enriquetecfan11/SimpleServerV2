@@ -1,5 +1,6 @@
 const db = require('../models')
 const miniestacion = db.miniestacion;
+const sensor = db.sensor;
 
 const { v4: uuidv4 } = require('uuid');
 const crypto = require('crypto')
@@ -35,25 +36,25 @@ const postMiniEstacion = (req, res) => {
   console.log("-----------------------------------------------" + "\n");
 
   // Only for database
-  // const miniestaciondatos = {
-  //   dispositivo: device,
-  //   hora: timestamp,
-  //   temperatura: temp,
-  //   altura: altura,
-  //   presion: presion,
-  //   luxes: luxes,
-  //   wifiRsii: wifiRssi,
-  // }
+  const miniestaciondatos = {
+    dispositivo: device,
+    hora: timestamp,
+    temperatura: temp,
+    altura: altura,
+    presion: presion,
+    luxes: luxes,
+    wifiRsii: wifiRssi,
+  }
 
-  // miniestacion.create(miniestaciondatos)
-  //   .then(data => {
-  //     res.status(200).json(data);
-  //   }).catch(err => {
-  //     // console.log(err);
-  //     res.status(500).send({
-  //       message: err.message || "Some error occurred while creating the Medidas."
-  //     });
-  //   });
+  miniestacion.create(miniestaciondatos)
+    .then(data => {
+      res.status(200).json(data);
+    }).catch(err => {
+      // console.log(err);
+      res.status(500).send({
+        message: err.message || "Some error occurred while creating the Medidas."
+      });
+    });
 }
 
 const getMiniEstacion = (req, res) => {
@@ -63,7 +64,6 @@ const getMiniEstacion = (req, res) => {
     res.sendStatus(500);
   });
 }
-
 
 const createSensor = (req, res) => {
   const sensor = {
@@ -76,9 +76,61 @@ const createSensor = (req, res) => {
     `🟢  Sensor uuid: ${sensor.uuid} \n`
   )
 
-  res.status(200).json(sensor)
+  sensor.create(sensor)
+    .then(data => {
+      res.status(200).json(data);
+    }).catch(err => {
+      // console.log(err);
+      res.status(500).send({
+        message: err.message || "Some error occurred while creating the Medidas."
+      });
+    });
+
+}
 
 
+const miniestacionID = (req, res) => {
+  const datosEstacion = {
+    UUID: uuid,
+    hora: timestamp,
+    temperatura: temp,
+    altura: altura,
+    presion: presion,
+    luxes: luxes,
+    wifiRsii: wifiRssi,
+  }
+
+  // First check in the database if the uuid is correct
+  sensor.findOne({
+    where: {
+      uuid: uuid
+    }
+  })
+    .then(miniestacion => {
+      if (miniestacion) {
+        console.log("🟢  UUID correcto")
+        // If the uuid is correct, then we create the data
+        miniestacion.create(datosEstacion)
+          .then(data => {
+            res.status(200).json(data);
+          }).catch(err => {
+            // console.log(err);
+            res.status(500).send({
+              message: err.message || "Some error occurred while creating the Medidas."
+            });
+          });
+      } else {
+        console.log("🔴  UUID incorrecto")
+        res.status(404).send({
+          message: "UUID incorrecto"
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: err.message || "Some error occurred while creating the Medidas."
+      });
+    })
 }
 
 module.exports = {
