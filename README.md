@@ -53,7 +53,7 @@ $ docker build -t simple-server .
 Second run image:
 
 ```console
-$ docker run -dp 4000:4000 getting-started.
+$ docker run --d -p 5000:5000 --name simpleserver simple-server 
 ```
 
 If you want to create a docker image with PostgreSQL
@@ -61,7 +61,5 @@ If you want to create a docker image with PostgreSQL
 ```console
 docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d postgres
 ```
-
-
 
 Made with ❤️ by `<a href="https://github.com/enriquetecfan11" target="_blank">`Enrique Rodriguez `</a>`

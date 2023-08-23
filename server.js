@@ -35,7 +35,7 @@ app.use('/api', ApiRoutes);
  * Start server
  * @type {number}
  */
-var port = process.env.PORT || 8000;
+var port = process.env.PORT || 5000;
 
 /**
  * Get system information
