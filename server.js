@@ -17,43 +17,11 @@ app.use(morgan('combined'));
 const ApiRoutes = require('./app/routes/routes.js');
 app.use('/api', ApiRoutes);
 
-
 // DB Options
 const db = require('./app/models');
 
-/*
-    -*- Server Options -*-
-
-    Develoment Evnironment
-
-    Windows = $env:NODE_ENV = 'development'
-    Linux && Mac = export NODE_ENV=development
-    then run: npm start to use development environment
-
-    Production Environment
-
-    Windows = $env:NODE_ENV = 'production'
-    Linux && Mac = export NODE_ENV=production
-    then run: npm start to use production environment
-
-*/
-
-
-// var environment = process.env.NODE_ENV;
-
-// if (environment === 'development') {
-//   db.sequelize.sync({ force: true }).then(() => {
-//     console.log('Drop and Resync with { force: true }');
-//   })
-// }
-
-// if (environment === 'production') {
-//   db.sequelize.sync();
-// }
-
 // Sync database
 db.sequelize.sync();
-
 
 // Start server
 var port = process.env.PORT || 8000;
