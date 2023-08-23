@@ -1,19 +1,9 @@
+const database = "miniestacion";
+const user = "postgres";
+const password = "tycgis";
+const host = "localhost";
+const port = "5432";
 
-// Servidor Casa
-// const user = 'admin'
-// const host = '192.168.1.125'
-// const database = 'postgres'
-// const password = 'mondejar'
-// const port = '5432'
-
-// Servidor Local -> postgres://postgres:postgrespw@localhost:32768
-
-const user = 'postgres'
-
-const host = 'host.docker.internal'
-const port = '32768'
-const database = 'postgres'
-const password = 'postgrespw'
 
 module.exports = {
     HOST: host,

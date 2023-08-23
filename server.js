@@ -39,17 +39,20 @@ const db = require('./app/models');
 */
 
 
-var environment = process.env.NODE_ENV;
+// var environment = process.env.NODE_ENV;
 
-if (environment === 'development') {
-  db.sequelize.sync({ force: true }).then(() => {
-    console.log('Drop and Resync with { force: true }');
-  })
-}
+// if (environment === 'development') {
+//   db.sequelize.sync({ force: true }).then(() => {
+//     console.log('Drop and Resync with { force: true }');
+//   })
+// }
 
-if (environment === 'production') {
-  db.sequelize.sync();
-}
+// if (environment === 'production') {
+//   db.sequelize.sync();
+// }
+
+// Sync database
+db.sequelize.sync();
 
 
 // Start server

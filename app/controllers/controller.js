@@ -19,12 +19,6 @@ const postMiniEstacion = (req, res) => {
   var luxes = req.body.luxes;
   var wifiRssi = req.body.wifiRsii;
 
-
-  // Pass req.body to JSON
-  // var data = JSON.stringify(req.body);
-  // res.status(200).json(data)
-
-
   console.log("-----------------------------------------------" + "\n");
   console.log("Received time: " + date.toLocaleTimeString() + "\n")
   console.log("Dispostivo: " + device + "\n");
