@@ -1,7 +1,7 @@
 /*******************************************************
   - Codigo de estacion temp wifi que tiene un BMP180, Luxometro y DHT11
-  - Este codigo envia al servidor cada x min los datos recogidos por los sensores7
-
+  - Este codigo envia al servidor cada x min los datos recogidos por los sensores
+  
   -Conexiones del sensor BM180 y el luxometro:
   + SDA - DATA
   + SCL - CLOCK
