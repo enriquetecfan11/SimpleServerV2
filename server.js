@@ -7,25 +7,40 @@ const si = require('systeminformation');
 require('dotenv').config();
 const morgan = require('morgan');
 
-// Express Options
+/**
+ * Express Options
+ */
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(morgan('combined'));
 
-// Express Routes
+/**
+ * Express Routes
+ */
 const ApiRoutes = require('./app/routes/routes.js');
 app.use('/api', ApiRoutes);
 
-// DB Options
+/**
+ * DB Options
+ */
 const db = require('./app/models');
 
-// Sync database
+/**
+ * Sync database
+ */
 db.sequelize.sync();
 
-// Start server
+/**
+ * Start server
+ * @type {number}
+ */
 var port = process.env.PORT || 8000;
 
+/**
+ * Get system information
+ * @returns {Promise<void>}
+ */
 async function systemInformation() {
   const date = new Date();
   const hour = new Intl.DateTimeFormat('es', { hour: 'numeric', hour12: false }).format(date);
@@ -59,6 +74,10 @@ async function systemInformation() {
   );
 }
 
+/**
+ * Connect to database
+ * @returns {Promise<void>}
+ */
 async function databaseConnection() {
   db.sequelize.sync()
     .then(() => {
@@ -69,12 +88,20 @@ async function databaseConnection() {
     });
 }
 
+/**
+ * Start the server
+ * @returns {Promise<void>}
+ */
 async function startServer() {
   app.listen(port, () => {
     console.log(`🚀  Server started on port ${port}`);
   });
 }
 
+/**
+ * Main function
+ * @returns {Promise<void>}
+ */
 async function main() {
   await startServer();
   await systemInformation();
