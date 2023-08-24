@@ -105,7 +105,7 @@ async function startServer() {
 async function main() {
   await startServer();
   await systemInformation();
-  // await databaseConnection();
+  await databaseConnection();
 }
 
 main();
