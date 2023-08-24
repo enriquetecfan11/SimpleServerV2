@@ -79,14 +79,24 @@ async function systemInformation() {
  * @returns {Promise<void>}
  */
 async function databaseConnection() {
-  db.sequelize.sync()
-    .then(() => {
-      console.log("🟢  Database connected");
-    })
+  // db.sequelize.sync()
+  //   .then(() => {
+  //     console.log("🟢  Database connected");
+  //   })
+  //   .catch((err) => {
+  //     console.log("🔴  Database connection failed " + err.message);
+  //   });
+
+  // Sequelize Sync True
+  db.sequelize.sync({ force: true }).then(() => {
+    console.log("🟢  Database connected");
+  })
     .catch((err) => {
       console.log("🔴  Database connection failed " + err.message);
-    });
-}
+    }
+    );
+};
+
 
 /**
  * Start the server
