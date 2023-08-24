@@ -24,12 +24,12 @@ app.use('/api', ApiRoutes);
 /**
  * DB Options
  */
-// const db = require('./app/models');
+const db = require('./app/models');
 
 /**
  * Sync database
  */
-// db.sequelize.sync();
+db.sequelize.sync();
 
 /**
  * Start server
@@ -78,15 +78,15 @@ async function systemInformation() {
  * Connect to database
  * @returns {Promise<void>}
  */
-// async function databaseConnection() {
-//   db.sequelize.sync()
-//     .then(() => {
-//       console.log("🟢  Database connected");
-//     })
-//     .catch((err) => {
-//       console.log("🔴  Database connection failed " + err.message);
-//     });
-// }
+async function databaseConnection() {
+  db.sequelize.sync()
+    .then(() => {
+      console.log("🟢  Database connected");
+    })
+    .catch((err) => {
+      console.log("🔴  Database connection failed " + err.message);
+    });
+}
 
 /**
  * Start the server
