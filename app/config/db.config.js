@@ -1,7 +1,7 @@
 const database = "miniestacion";
 const user = "postgres";
 const password = "tycgis";
-const host = "localhost";
+const host = "192.168.1.72";
 const port = "5432";
 
 
