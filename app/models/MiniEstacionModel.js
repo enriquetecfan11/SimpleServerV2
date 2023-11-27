@@ -29,6 +29,10 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.FLOAT,
       allowNull: true
     },
+    humedad: {
+      type: Sequelize.FLOAT,
+      allowNull: true
+    },
     wifiRsii: {
       type: Sequelize.FLOAT,
       allowNull: true

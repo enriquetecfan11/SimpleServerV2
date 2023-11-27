@@ -22,6 +22,13 @@ const ApiRoutes = require('./app/routes/routes.js');
 app.use('/api', ApiRoutes);
 
 /**
+ * Simple Route for welcome message
+ */
+app.get('/', (req, res) => {
+  res.json({ message: 'Welcome to the API' });
+});
+
+/**
  * DB Options
  */
 const db = require('./app/models');
@@ -87,7 +94,7 @@ async function databaseConnection() {
   //     console.log("🔴  Database connection failed " + err.message);
   //   });
 
-  // Sequelize Sync True
+  //Sequelize Sync True
   db.sequelize.sync({ force: true }).then(() => {
     console.log("🟢  Database connected");
   })

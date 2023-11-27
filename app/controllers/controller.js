@@ -18,6 +18,7 @@ const postMiniEstacion = (req, res) => {
   var presion = req.body.presion;
   var luxes = req.body.luxes;
   var wifiRssi = req.body.wifiRsii;
+  var humedad = req.body.humedad;
 
   console.log("-----------------------------------------------" + "\n");
   console.log("Received time: " + date.toLocaleTimeString() + "\n")
@@ -27,6 +28,7 @@ const postMiniEstacion = (req, res) => {
   console.log("Presion: ", presion + " p" + "\n");
   console.log("Luxes: ", luxes + " lx" + "\n");
   console.log("WifiRssi: ", wifiRssi + " db" + "\n");
+  console.log("Humedad: ", humedad + " %" + "\n");
   console.log("-----------------------------------------------" + "\n");
 
   // Only for database
@@ -38,6 +40,7 @@ const postMiniEstacion = (req, res) => {
     presion: presion,
     luxes: luxes,
     wifiRsii: wifiRssi,
+    humedad: humedad
   }
 
   // Add data to db

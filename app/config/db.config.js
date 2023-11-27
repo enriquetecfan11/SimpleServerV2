@@ -1,9 +1,8 @@
 const database = "miniestacion";
 const user = "postgres";
 const password = "tycgis";
-const host = "192.168.1.72";
+const host = "db"; // This should be the name of your PostgreSQL Docker container
 const port = "5432";
-
 
 module.exports = {
     HOST: host,
@@ -19,5 +18,4 @@ module.exports = {
       acquire: 30000,
       idle: 10000
     }
-  };
-
+};
