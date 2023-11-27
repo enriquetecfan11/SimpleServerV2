@@ -13,5 +13,8 @@ RUN npm install
 # Copy the rest of the application files to the working directory
 COPY . .
 
+# Expose the port the app runs in
+EXPOSE 5000
+
 # Start the server by running the server.js file with Node.js
 CMD [ "node", "server.js" ]
