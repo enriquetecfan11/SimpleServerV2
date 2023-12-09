@@ -1,20 +1,23 @@
-# Use the latest Node.js image as the base image
-FROM node:latest
+# Utiliza una imagen base de Node.js
+FROM node:14
 
-# Set the working directory to /app
+# Crea un directorio de trabajo
 WORKDIR /app
 
-# Copy the package.json and package-lock.json files to the working directory
-COPY ["package.json", "package-lock.json*", "./"]
+# Copia el package.json y package-lock.json (si está disponible)
+COPY package*.json ./
 
-# Install the dependencies specified in package.json
+# Actualiza npm a la última versión
+RUN npm install -g npm@latest
+
+# Instala las dependencias del proyecto
 RUN npm install
 
-# Copy the rest of the application files to the working directory
+# Copia los archivos del proyecto
 COPY . .
 
-# Expose the port the app runs in
+# Expone el puerto que utiliza la aplicación
 EXPOSE 5000
 
-# Start the server by running the server.js file with Node.js
-CMD [ "node", "server.js" ]
+# Comando para iniciar la aplicación
+CMD ["npm", "start"]
