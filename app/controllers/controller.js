@@ -134,10 +134,52 @@ const miniestacionID = (req, res) => {
     })
 }
 
+const rawData = (req, res) => {
+var date = new Date();
+  var timeString = date.toLocaleTimeString();
+  var timestamp = date.getTime();
+
+  var device = req.body.dispositivo;
+  var hora = req.body.hora;
+  var temp = req.body.temperatura;
+  var altura = req.body.altura;
+  var presion = req.body.presion;
+  var luxes = req.body.luxes;
+  var wifiRsii = req.body.wifiRsii;
+  var humedad = req.body.humedad;
+
+  console.log("-----------------------------------------------" + "\n");
+  console.log("Received time: " + date.toLocaleTimeString() + "\n")
+  console.log("Dispostivo: " + device + "\n");
+  console.log("Temperatura: ", temp + " ºC" + "\n");
+  console.log("Humedad: ", humedad + " %" + "\n");
+  console.log("WifiRsii: ", wifiRsii + " db" + "\n");
+  console.log("-----------------------------------------------" + "\n");
+
+  // Only for database
+  const miniestaciondatos = {
+    dispositivo: device,
+    hora: timestamp,
+    humedad: humedad,
+    wifiRsii: wifiRsii,
+    temperatura: temp,
+  }
+
+  // Add data to db
+  db.miniestacion.create(miniestaciondatos).then(miniestacion => {
+    res.status(200).json(miniestacion);
+  }).catch(err => {
+    res.status(500).send({
+      message: err.message || "Some error occurred while creating the Medidas."
+    });
+  });
+}
+
 module.exports = {
   postMiniEstacion,
   getMiniEstacion,
   createSensor,
   getSensor,
-  miniestacionID
+  miniestacionID,
+  rawData
 }
