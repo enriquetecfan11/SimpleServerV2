@@ -5,11 +5,11 @@ module.exports = (sequelize, Sequelize) => {
       primaryKey: true,
       autoIncrement: true,
     },
-    dispositivo: {
+    device: {
       type: Sequelize.STRING,
       allowNull: true
     },
-    hora: {
+    deviceTime: {
       type: Sequelize.DATE,
       allowNull: true
     },
