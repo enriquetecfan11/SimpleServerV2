@@ -7,11 +7,18 @@ const crypto = require('crypto')
 
 
 const postMiniEstacion = (req, res) => {
-  const {dispositivo, deviceTime, temperatura, altura, presion, luxes, wifiRsii, humedad} = req.body;
+  const { dispositivo, deviceTime, temperatura, altura, presion, luxes, wifiRsii, humedad } = req.body;
+
+  // Convertir el tiempo Unix (en segundos) a un objeto Date
+  const timestamp = parseInt(data.deviceTime, 10);
+  const date = new Date(timestamp * 1000); 
+
+  // Formatear la fecha y hora
+  const formattedDate = date.toISOString();
 
   console.log("-----------------------------------------------" + "\n");
   console.log("Received time: " + deviceTime + "\n")
-  console.log("Dispostivo: " + dispositivo + "\n");
+  console.log("Dispostivo: " + formattedDate + "\n");
   console.log("Temperatura: ", temperatura + " ºC" + "\n");
   console.log("Altura: ", altura + " M" + "\n");
   console.log("Presion: ", presion + " p" + "\n");
@@ -23,7 +30,7 @@ const postMiniEstacion = (req, res) => {
   // Only for database
   const miniestaciondatos = {
     dispositivo: dispositivo,
-    deviceTime: deviceTime,
+    deviceTime: formattedDate,
     temperatura: temperatura,
     altura: altura,
     presion: presion,
@@ -78,8 +85,6 @@ const getSensor = (req, res) => {
     res.sendStatus(500);
   });
 }
-
-
 
 module.exports = {
   postMiniEstacion,
