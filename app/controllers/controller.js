@@ -10,7 +10,7 @@ const postMiniEstacion = (req, res) => {
   const { dispositivo, deviceTime, temperatura, altura, presion, luxes, wifiRsii, humedad } = req.body;
 
   // Convertir el tiempo Unix (en segundos) a un objeto Date
-  const timestamp = parseInt(data.deviceTime, 10);
+  const timestamp = parseInt(deviceTime, 10); // use deviceTime directly
   const date = new Date(timestamp * 1000); 
 
   // Formatear la fecha y hora
