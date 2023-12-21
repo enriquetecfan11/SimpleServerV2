@@ -9,13 +9,11 @@ const crypto = require('crypto')
 const postMiniEstacion = (req, res) => {
   const { dispositivo, deviceTime, temperatura, altura, presion, luxes, wifiRsii, humedad } = req.body;
 
-<<<<<<< HEAD
   // Convertir el tiempo Unix (en segundos) a un objeto Date
   const timestamp = parseInt(deviceTime, 10); // use deviceTime directly
-=======
-  const timestamp = parseInt(deviceTime, 10);
->>>>>>> 0b331ee71fc4d0f28bb6cadd381b9fe65c10555b
   const date = new Date(timestamp * 1000); 
+
+  // Formatear la fecha y hora
   const formattedDate = date.toISOString();
 
   console.log("-----------------------------------------------" + "\n");
