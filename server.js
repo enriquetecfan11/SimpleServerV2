@@ -35,14 +35,27 @@ const db = require('./app/models');
 
 /**
  * Sync database
+ * Connect to database if enabled
+ * @returns {Promise<void>}
  */
-db.sequelize.sync();
+async function databaseConnection() {
+  if (process.env.USE_DATABASE === 'true') {
+    db.sequelize.sync({ force: true }).then(() => {
+      console.log("🟢  Database connected");
+    }).catch((err) => {
+      console.log("🔴  Database connection failed: " + err.message);
+    });
+  } else {
+    console.log("🟢  Database connection disabled.");
+  }
+};
+
 
 /**
  * Start server
  * @type {number}
  */
-var port = process.env.PORT || 5000;
+var port = process.env.PORT || 8000;
 
 /**
  * Get system information
@@ -119,10 +132,20 @@ async function startServer() {
  * Main function
  * @returns {Promise<void>}
  */
+/**
+ * Main function
+ * @returns {Promise<void>}
+ */
 async function main() {
   await startServer();
   await systemInformation();
-  await databaseConnection();
+
+  // Comprobar si se debe conectar a la base de datos
+  if (process.env.USE_DATABASE === 'true') {
+    await databaseConnection();
+  } else {
+    console.log("🟡  Database connection is disabled.");
+  }
 }
 
 main();
