@@ -10,4 +10,6 @@ router.get('/sensor', ApiController.getSensor);
 
 router.post('/miniestacionid', ApiController.miniestacionID);
 
+router.post('/rawdata', ApiController.rawData);
+
 module.exports = router;
