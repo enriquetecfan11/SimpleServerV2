@@ -1,23 +1,27 @@
-version: '3'
+version: '3.8'
+
 services:
-  app:
-    build: .
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: tycgis
+      POSTGRES_DB: miniestacion
     ports:
-      - "5000:5000"
+      - "5432:5432"
     volumes:
-      - .:/app
-      - /app/node_modules
+      - pgdata:/var/lib/postgresql/data
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_URL: postgres://postgres:tycgis@db:5432/miniestacion
+    ports:
+      - "8000:8000"
     depends_on:
       - db
-    environment:
-      - DATABASE_HOST=db
-  db:
-    image: postgres
-    environment:
-      - POSTGRES_DB=miniestacion
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=tycgis
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+
 volumes:
-  postgres_data:
+  pgdata:
